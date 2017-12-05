@@ -1,0 +1,2 @@
+DataProvider: sqlserver
+DataConnectionString: Data Source=LAPTOP-HO3BVU7S\SQLEXPRESS;Initial Catalog=FitnessSite_db;Integrated Security=True;Persist Security Info=False

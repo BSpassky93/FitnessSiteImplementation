@@ -1,0 +1,49 @@
+﻿@{
+    Layout = "~/Views/Shared/_Root.Head.cshtml";
+}
+@Html.Widget("body_start_html_tag_after")
+@Html.Partial("_Notifications")
+@Html.Action("JavaScriptDisabledWarning", "Common")
+@Html.Partial("OldInternetExplorerWarning")
+@{
+    var controllerName = System.Web.HttpContext.Current.Request.RequestContext.RouteData.GetRequiredString("controller");
+    var isHomePage = controllerName.Equals("home", StringComparison.InvariantCultureIgnoreCase);
+}
+
+<div class="master-wrapper-page">
+     <div class="menu-mobile-view">
+        @Html.Action("TopMenu", "Catalog")
+    </div>
+    @Html.Action("AdminHeaderLinks", "Common")
+    @Html.Partial("Header")
+    <script type="text/javascript">
+        AjaxCart.init(false, '.header-links .cart-qty', '.header-links .wishlist-qty', '#flyout-cart');
+    </script>
+    <div class="header-menu menu-desktop-view">
+        @Html.Action("TopMenu", "Catalog")
+    </div>
+    <div class="master-wrapper-content">
+        @Html.Widget("content_before")
+
+        @if (IsSectionDefined("Breadcrumb"))
+        {
+            @RenderSection("Breadcrumb") 
+        }
+        <div class="master-column-wrapper">
+            @RenderBody()
+        </div>
+        @Html.Widget("content_after")
+    </div>
+    @Html.Action("Footer", "Common")
+</div>
+@if (isHomePage) {
+    <style>
+        .master-wrapper-content {
+            width: 100%;           
+        }
+        
+    </style>
+
+}
+@Html.Action("EuCookieLaw", "Common")
+@Html.Widget("body_end_html_tag_before")
